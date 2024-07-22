@@ -16,19 +16,19 @@ app.use(express.json());
 const PORT = process.env.PORT; 
 const mongo_url = process.env.MONGO_URL;
 
-// const allowedOrigins = ['http://localhost:5173','https://snegamsp.netlify.app'];
+const allowedOrigins = ['http://localhost:5173','https://snegamsp.netlify.app'];
 
-// app.use(cors());
-// app.use(express.json({ limit: '10mb' }));
-// app.use((request, response, next) => {
-//   const origin = request.headers.origin;
-//   if (allowedOrigins.includes(origin)) {
-//     response.header('Access-Control-Allow-Origin', origin);
-//   }
-//   response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//   response.header('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// });
+app.use(cors());
+app.use(express.json({ limit: '10mb' }));
+app.use((request, response, next) => {
+  const origin = request.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    response.header('Access-Control-Allow-Origin', origin);
+  }
+  response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  response.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 
 export const client = new MongoClient(mongo_url);
